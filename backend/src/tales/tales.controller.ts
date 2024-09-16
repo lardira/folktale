@@ -9,11 +9,16 @@ import {
   Put,
 } from '@nestjs/common';
 import { TalesService } from './tales.service';
-import { CreateTaleDto, UpdateTaleDto } from './dto/tale.dto';
+import { CreateTaleDto, UpdateTaleDto } from '../dto/tale.dto';
+import { ChaptersService } from 'src/chapters/chapters.service';
+import { CreateChapterDto, UpdateChapterDto } from 'src/dto/chapter.dto';
 
 @Controller('tales')
 export class TalesController {
-  constructor(private readonly talesService: TalesService) {}
+  constructor(
+    private readonly talesService: TalesService,
+    private readonly chapterService: ChaptersService,
+  ) {}
 
   @Post()
   create(@Body() createTaleDto: CreateTaleDto) {
@@ -38,5 +43,40 @@ export class TalesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.talesService.remove(+id);
+  }
+
+  //chapters
+  @Get(':id/chapters')
+  findAllChapters(@Param('id') id: string) {
+    return this.chapterService.findAll(+id);
+  }
+
+  @Get(':id/chapters/:chapterId')
+  findOneChapter(
+    @Param('id') id: string,
+    @Param('chapterId') chapterId: string,
+  ) {
+    return this.chapterService.findOne(+id, +chapterId);
+  }
+
+  @Post(':id/chapters')
+  createChapter(
+    @Param('id') id: string,
+    @Body() createChapterDto: CreateChapterDto,
+  ) {
+    return this.chapterService.create(+id, createChapterDto);
+  }
+
+  @Patch(':id/chapters/:chapterId')
+  updateChapter(
+    @Param('chapterId') chapterId: string,
+    @Body() updateChapterDto: UpdateChapterDto,
+  ) {
+    return this.chapterService.update(+chapterId, updateChapterDto);
+  }
+
+  @Delete(':id/chapters/:chapterId')
+  removeChapter(@Param('id') id: string) {
+    return this.chapterService.remove(+id);
   }
 }
