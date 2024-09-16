@@ -13,13 +13,13 @@ export class Tale {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ default: 0 })
   maxChapter: number;
 
-  @Column()
+  @Column({ default: 256 })
   maxChapterSize: number;
 
-  @Column()
+  @Column({ nullable: true })
   img: string;
 
   @Column()

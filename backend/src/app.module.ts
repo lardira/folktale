@@ -3,17 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TalesModule } from './tales/tales.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ChaptersModule } from './chapters/chapters.module';
+
+const configurableImports = [
+  TypeOrmModule.forRoot({
+    type: 'sqlite',
+    database: './.local/test.db',
+    synchronize: true,
+    autoLoadEntities: true,
+    logging: true,
+  }),
+];
 
 @Module({
-  imports: [
-    TalesModule,
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: './.local/test.db',
-      synchronize: true,
-      autoLoadEntities: true,
-    }),
-  ],
+  imports: [...configurableImports, TalesModule, ChaptersModule],
   controllers: [AppController],
   providers: [AppService],
 })
