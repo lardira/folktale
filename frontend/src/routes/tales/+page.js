@@ -8,7 +8,13 @@ export async function load({ fetch, params }) {
 		const res = await fetch(`${config.apiUrl}/tales/${taleId}`);
 		return await res.json();
 	};
+
+	const getChapters = async () => {
+		const res = await fetch(`${config.apiUrl}/tales/${taleId}/chapters`);
+		return await res.json();
+	};
 	return {
-		tale: await getTale()
+		tale: await getTale(),
+		chapters: await getChapters()
 	};
 }
