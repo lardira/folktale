@@ -55,6 +55,23 @@ export class ChaptersService {
     return this.chapterRepository.findOne({
       where: { id, taleId },
       relations: ['nextChapters'],
+      order: {
+        nextChapters: {
+          score: 'DESC',
+        },
+      },
+    });
+  }
+
+  async findFirst(taleId: number) {
+    return this.chapterRepository.findOne({
+      where: { position: 0, taleId },
+      relations: ['nextChapters'],
+      order: {
+        nextChapters: {
+          score: 'DESC',
+        },
+      },
     });
   }
 
