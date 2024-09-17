@@ -1,6 +1,13 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { UUID } from 'crypto';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Tale {
@@ -24,4 +31,8 @@ export class Tale {
 
   @Column()
   authorId: UUID;
+
+  @ManyToOne(() => User, (user) => user.tales)
+  @JoinColumn({ name: 'authorId' })
+  author: User;
 }
