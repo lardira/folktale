@@ -10,6 +10,7 @@
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^5.0.0",
+		"@iconify-json/mdi": "^1.2.0",
 		"@neoconfetti/svelte": "^2.0.0",
 		"@skeletonlabs/skeleton": "^2.10.2",
 		"@skeletonlabs/tw-plugin": "^0.4.0",
@@ -23,7 +24,12 @@
 		"prettier-plugin-tailwindcss": "^0.6.5",
 		"svelte": "^4.2.7",
 		"tailwindcss": "^3.4.9",
+		"unplugin-icons": "^0.19.3",
 		"vite": "^5.0.3"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"axios": "^1.7.7",
+		"lodash": "^4.17.21"
+	}
 }

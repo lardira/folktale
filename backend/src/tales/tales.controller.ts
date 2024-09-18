@@ -56,6 +56,11 @@ export class TalesController {
     return this.chapterService.findFirst(+id);
   }
 
+  @Get(':id/chapters/from/:chapterId')
+  findFrom(@Param('id') id: string, @Param('chapterId') chapterId: string) {
+    return this.chapterService.findFrom(+id, +chapterId);
+  }
+
   @Get(':id/chapters/:chapterId')
   findOneChapter(
     @Param('id') id: string,
