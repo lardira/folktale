@@ -7,6 +7,8 @@
 	export let data;
 
 	const { tale, canonLine } = data;
+
+	let chapters = canonLine;
 </script>
 
 <div class="tale-view-container">
@@ -34,11 +36,15 @@
 				<h3 class="chapters-view-title">Chapters</h3>
 				<ul>
 					<li>
-						{#each canonLine as ch, i}
+						{#each chapters as chapter, i (chapter.id)}
 							{#if i > 0}
-								<ChapterView chapterData={ch} siblings={canonLine[i - 1].nextChapters} />
+								<ChapterView
+									bind:chapters
+									chapterData={chapter}
+									siblings={chapters[i - 1].nextChapters}
+								/>
 							{:else}
-								<ChapterView chapterData={ch} />
+								<ChapterView chapterData={chapter} />
 							{/if}
 						{/each}
 					</li>
