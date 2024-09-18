@@ -63,6 +63,25 @@ export class ChaptersService {
     });
   }
 
+  async findFrom(taleId: number, id: number) {
+    const output = [];
+    const from = await this.findOne(taleId, id);
+
+    if (!from) {
+      throw new Error('chapter not found');
+    }
+
+    let head = from;
+    output.push(head);
+
+    while (head.nextChapters.length != null && head.nextChapters.length > 0) {
+      head = await this.findOne(taleId, head.nextChapters[0].id);
+      output.push(head);
+    }
+
+    return output;
+  }
+
   async findFirst(taleId: number) {
     return this.chapterRepository.findOne({
       where: { position: 0, taleId },
