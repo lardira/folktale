@@ -1,5 +1,6 @@
 // @ts-check
 import { join } from 'path';
+import forms from '@tailwindcss/forms';
 
 import { skeleton } from '@skeletonlabs/tw-plugin';
 
@@ -12,10 +13,11 @@ export default {
 	],
 	theme: {
 		extend: {}
-	},	
+	},
 	plugins: [
 		skeleton({
 			themes: { preset: ['wintry'] }
-		})
+		}),
+		forms
 	]
 };
